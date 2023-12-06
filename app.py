@@ -189,9 +189,9 @@ engine = sqlalchemy.create_engine(
     ),
     connect_args={
         "sslmode": 'require',  # Use 'require' to enable SSL
-        'sslcert': '/certificates/postgresql.crt',  # Path to client certificate file
-        'sslkey': '/certificates/postgresql.key',  # Pat
-        'sslrootcert': '/certificates/root.crt',
+        'sslcert': '/postgresql.crt',  # Path to client certificate file
+        'sslkey': '/postgresql.key',  # Pat
+        'sslrootcert': '/root.crt',
         'user': fixie_user,
         'password': fixie_pass,
         'host': fixie_host,
