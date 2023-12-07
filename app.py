@@ -161,7 +161,10 @@
 import sqlalchemy
 import os
 import urllib.parse as urlparse
+from flask import Flask
 
+
+app = Flask(__name__)
 # Parse Fixie URL from environment variable
 # fixie_url = "http://fixie:YpcpuxmrFDMenhX@velodrome.usefixie.com:80"
 fixie_url = "https://r09cndoizux678:44m6nmtadw9bg10eowfxi45cyrbyku@us-east-shield-04.quotaguard.com:9294"
@@ -174,40 +177,51 @@ fixie_user, fixie_pass = parsed_fixie.username, parsed_fixie.password
 postgres_connection_string = "postgres://ucrol25emqd2ch:p31d791a3fe8bcb5b5102d7b8b43f08ca70ee2cc9d7943c23b4db6b110324346e@ec2-52-2-248-148.compute-1.amazonaws.com:5432/d2r45oj3jf7gs7"
 print("fixie_user: ",fixie_user)
 print("fixie_pass: ",fixie_pass)
+
+@app.route('/')
+def hello():
+    # return 'Hello from Python!'
+    r = requests.get('https://www.google.com', proxies=proxyDict)
+    # r = requests.get('https://www.google.com')
+    return r.text
+
+
+@app.route('/dbconnect')
+def connect():
 # Create an engine that routes through the proxy
-engine = sqlalchemy.create_engine(
-    # Equivalent URL:
-    # postgresql+pg8000://<db_user>:<db_pass>@<db_host>:<db_port>/<db_name>
-    sqlalchemy.engine.url.URL.create(
-        drivername="postgresql",
-        username="ucrol25emqd2ch",
-        password="p31d791a3fe8bcb5b5102d7b8b43f08ca70ee2cc9d7943c23b4db6b110324346e",
-        host="ec2-52-2-248-148.compute-1.amazonaws.com",
-        port=5432,
-        database="d2r45oj3jf7gs7",
-
-    ),
-    connect_args={
-        "sslmode": 'require',  # Use 'require' to enable SSL
-        'sslcert': '/postgresql.crt',  # Path to client certificate file
-        'sslkey': '/postgresql.key',  # Pat
-        'sslrootcert': '/root.crt',
-        'user': fixie_user,
-        'password': fixie_pass,
-        'host': fixie_host,
-        'port': fixie_port
-    },
-    # ...
-)
-
-# Test the connection
-try:
-    print("engine: ",engine)
-    with engine.connect() as connection:
-        print("connection: ",connection)
-        result = connection.execute("SELECT 101")
-        for row in result:
-            print("Connection test: ", row)
-    print("Connection to the database was successful!")
-except Exception as e:
-    print("Error connecting to the database: ", e)
+    engine = sqlalchemy.create_engine(
+        # Equivalent URL:
+        # postgresql+pg8000://<db_user>:<db_pass>@<db_host>:<db_port>/<db_name>
+        sqlalchemy.engine.url.URL.create(
+            drivername="postgresql",
+            username="ucrol25emqd2ch",
+            password="p31d791a3fe8bcb5b5102d7b8b43f08ca70ee2cc9d7943c23b4db6b110324346e",
+            host="ec2-52-2-248-148.compute-1.amazonaws.com",
+            port=5432,
+            database="d2r45oj3jf7gs7",
+    
+        ),
+        connect_args={
+            "sslmode": 'require',  # Use 'require' to enable SSL
+            'sslcert': '/postgresql.crt',  # Path to client certificate file
+            'sslkey': '/postgresql.key',  # Pat
+            'sslrootcert': '/root.crt',
+            'user': fixie_user,
+            'password': fixie_pass,
+            'host': fixie_host,
+            'port': fixie_port
+        },
+        # ...
+    )
+    
+    # Test the connection
+    try:
+        print("engine: ",engine)
+        with engine.connect() as connection:
+            print("connection: ",connection)
+            result = connection.execute("SELECT 101")
+            for row in result:
+                print("Connection test: ", row)
+        print("Connection to the database was successful!")
+    except Exception as e:
+        print("Error connecting to the database: ", e)
