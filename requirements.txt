@@ -20,11 +20,11 @@ elasticsearch==8.10.1
 enum34==1.1.10
 fastapi==0.104.1
 filelock==3.12.4
-Flask==1.1.4
-Flask-Cors==4.0.0
-Flask-Migrate==4.0.5
-Flask-Script==2.0.6
-Flask-SQLAlchemy==3.1.1
+Flask
+flask-cors
+flask-migrate
+flask-script
+flask-sqlalchemy
 google-ai-generativelanguage==0.3.3
 google-api-core==2.14.0
 google-api-python-client==2.108.0
