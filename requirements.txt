@@ -100,7 +100,7 @@ tqdm==4.66.1
 typing_extensions==4.8.0
 tzdata==2023.3
 uritemplate==4.1.1
-urllib3==2.1.0
+urllib3>=2.1.0,<3.0.0
 uvicorn==0.13.4
 virtualenv==20.24.5
 Werkzeug==0.16.1
