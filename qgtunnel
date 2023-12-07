@@ -1,0 +1,12 @@
+
+[qgtunnel.0]
+accept = "127.0.0.1:5432"
+connect = "ec2-52-2-248-148.compute-1.amazonaws.com:5432"
+encrypted = false
+transparent = true
+
+[qgtunnel.1]
+accept = "127.0.0.2:5432"
+connect = "ec2-52-2-248-148.compute-1.amazonaws.com:"
+encrypted = false
+transparent = false
