@@ -157,7 +157,7 @@
 # if __name__ == '__main__':
 #    app.run(debug=True)
 
-
+import os, requests
 import sqlalchemy
 import os
 import urllib.parse as urlparse
@@ -181,9 +181,9 @@ print("fixie_pass: ",fixie_pass)
 @app.route('/')
 def hello():
     # return 'Hello from Python!'
-    r = requests.get('https://www.google.com', proxies=proxyDict)
+    # r = requests.get('https://www.google.com', proxies=proxyDict)
     # r = requests.get('https://www.google.com')
-    return r.text
+    return "App Running"
 
 
 @app.route('/dbconnect')
