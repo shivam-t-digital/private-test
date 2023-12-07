@@ -206,10 +206,10 @@ def connect():
             'sslcert': '/postgresql.crt',  # Path to client certificate file
             'sslkey': '/postgresql.key',  # Pat
             'sslrootcert': '/root.crt',
-            'user': fixie_user,
-            'password': fixie_pass,
-            'host': fixie_host,
-            'port': fixie_port
+            # 'user': fixie_user,
+            # 'password': fixie_pass,
+            # 'host': fixie_host,
+            # 'port': fixie_port
         },
         # ...
     )
