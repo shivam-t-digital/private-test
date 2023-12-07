@@ -1,1 +1,1 @@
-web: bin/qgtunnel gunicorn app:app -w 4
+web: gunicorn app:app -w 4
